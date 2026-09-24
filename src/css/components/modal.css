@@ -4,8 +4,8 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 24, 53, 0.6);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,9 +16,10 @@
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 .modal-box {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
+  background: #FFFFFF;
+  border: 1px solid var(--silver-border);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
   padding: 28px;
   width: 560px;
   max-width: 95vw;
@@ -27,7 +28,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  box-shadow: var(--shadow-lg);
   animation: slideUp 0.2s ease;
 }
 
@@ -39,7 +40,7 @@
 .modal-title {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--navy-primary);
 }
 
 .modal-desc { font-size: 13px; color: var(--text-secondary); }
@@ -53,16 +54,16 @@
 .dup-table th, .dup-table td {
   padding: 8px 12px;
   text-align: left;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--silver-border);
 }
 
 .dup-table th {
-  color: var(--text-muted);
+  color: var(--navy-primary);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-weight: 600;
-  background: var(--bg-raised);
+  font-weight: 700;
+  background: var(--silver-light);
 }
 
 .dup-table td { color: var(--text-secondary); }

@@ -1,44 +1,53 @@
 /* ============================================================
    Gestor de Exámenes PDF — Design Tokens & Base Reset
+   Theme: Dark Royal Navy (#002855), High-Contrast Accent Red (#DA121A),
+   Clean White & Light Silver Backgrounds/Surfaces
    ============================================================ */
 
 /* ---- CSS Custom Properties ---- */
 :root {
-  --bg-base:       #0d1117;
-  --bg-surface:    #161b22;
-  --bg-raised:     #1c2230;
-  --bg-hover:      #21293a;
-  --border:        rgba(255,255,255,0.08);
-  --border-focus:  rgba(124,111,247,0.6);
+  --navy-primary:  #002855;
+  --navy-dark:     #001835;
+  --silver-light:  #F4F6F9;
+  --silver-surface:#E9ECEF;
+  --silver-border: #CED4DA;
 
-  --accent:        #7c6ff7;
-  --accent-hover:  #9a8fff;
-  --accent-dim:    rgba(124,111,247,0.15);
-  --danger:        #f97070;
-  --danger-hover:  #ff8f8f;
-  --danger-dim:    rgba(249,112,112,0.15);
-  --success:       #56d58c;
-  --warning:       #f5c542;
+  --bg-base:       #F4F6F9;
+  --bg-surface:    #FFFFFF;
+  --bg-raised:     #FFFFFF;
+  --bg-hover:      #E9ECEF;
+  --border:        #DEE2E6;
+  --border-focus:  #DA121A;
 
-  --text-primary:  #e6edf3;
-  --text-secondary:#8b949e;
-  --text-muted:    #484f58;
+  --accent:        #DA121A;
+  --accent-hover:  #B50E15;
+  --accent-dim:    rgba(218, 18, 26, 0.08);
+  
+  --danger:        #DA121A;
+  --danger-hover:  #B50E15;
+  --danger-dim:    rgba(218, 18, 26, 0.1);
+  --success:       #198754;
+  --warning:       #FD7E14;
 
-  --radius-sm:     6px;
-  --radius-md:     10px;
-  --radius-lg:     14px;
-  --radius-xl:     20px;
+  --text-primary:  #001835;
+  --text-secondary:#495057;
+  --text-muted:    #6C757D;
 
-  --shadow-sm:     0 1px 4px rgba(0,0,0,0.4);
-  --shadow-md:     0 4px 20px rgba(0,0,0,0.5);
-  --shadow-lg:     0 8px 40px rgba(0,0,0,0.7);
-  --shadow-glow:   0 0 24px rgba(124,111,247,0.25);
+  --radius-sm:     4px;
+  --radius-md:     6px;
+  --radius-lg:     8px;
+  --radius-xl:     12px;
 
-  --sidebar-width: 220px;
+  --shadow-sm:     0 1px 3px rgba(0, 40, 85, 0.08);
+  --shadow-md:     0 4px 12px rgba(0, 40, 85, 0.12);
+  --shadow-lg:     0 8px 24px rgba(0, 40, 85, 0.16);
+  --shadow-glow:   0 0 16px rgba(218, 18, 26, 0.2);
+
+  --sidebar-width: 240px;
   --header-height: 60px;
   --tab-height:    48px;
 
-  --transition: 0.18s ease;
+  --transition: 0.15s ease-in-out;
 }
 
 /* ---- Reset & Base ---- */
@@ -60,8 +69,8 @@ body {
 /* ---- Global Scrollbars & Utilities ---- */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+::-webkit-scrollbar-thumb { background: var(--silver-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #ADB5BD; }
 
 .hidden { display: none !important; }
 
