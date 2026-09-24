@@ -1,0 +1,80 @@
+/* ============================================================
+   Gestor de Exámenes PDF — Design Tokens & Base Reset
+   ============================================================ */
+
+/* ---- CSS Custom Properties ---- */
+:root {
+  --bg-base:       #0d1117;
+  --bg-surface:    #161b22;
+  --bg-raised:     #1c2230;
+  --bg-hover:      #21293a;
+  --border:        rgba(255,255,255,0.08);
+  --border-focus:  rgba(124,111,247,0.6);
+
+  --accent:        #7c6ff7;
+  --accent-hover:  #9a8fff;
+  --accent-dim:    rgba(124,111,247,0.15);
+  --danger:        #f97070;
+  --danger-hover:  #ff8f8f;
+  --danger-dim:    rgba(249,112,112,0.15);
+  --success:       #56d58c;
+  --warning:       #f5c542;
+
+  --text-primary:  #e6edf3;
+  --text-secondary:#8b949e;
+  --text-muted:    #484f58;
+
+  --radius-sm:     6px;
+  --radius-md:     10px;
+  --radius-lg:     14px;
+  --radius-xl:     20px;
+
+  --shadow-sm:     0 1px 4px rgba(0,0,0,0.4);
+  --shadow-md:     0 4px 20px rgba(0,0,0,0.5);
+  --shadow-lg:     0 8px 40px rgba(0,0,0,0.7);
+  --shadow-glow:   0 0 24px rgba(124,111,247,0.25);
+
+  --sidebar-width: 220px;
+  --header-height: 60px;
+  --tab-height:    48px;
+
+  --transition: 0.18s ease;
+}
+
+/* ---- Reset & Base ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 14px; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Global Scrollbars & Utilities ---- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+
+.hidden { display: none !important; }
+
+/* ---- Main Layout Structure ---- */
+#app-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+#work-area {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
