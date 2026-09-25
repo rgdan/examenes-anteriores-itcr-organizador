@@ -79,58 +79,103 @@
 }
 
 .radio-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  display: grid;
+  gap: 8px;
+  width: 100%;
+}
+
+.radio-grid-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.radio-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.radio-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .radio-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  min-height: 42px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--silver-border);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy-primary);
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0, 40, 85, 0.05);
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+  position: relative;
+}
+
+.radio-pill input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.radio-pill span {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
-.radio-pill input { display: none; }
-
-.radio-pill span,
-.radio-pill:not(:has(input)) {
-  padding: 5px 12px;
-  border-radius: 4px;
-  border: 1px solid var(--silver-border);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background var(--transition), border-color var(--transition), color var(--transition);
-  color: var(--text-secondary);
+.radio-pill:hover {
   background: var(--silver-light);
-  user-select: none;
+  border-color: var(--navy-primary);
+  color: var(--navy-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 40, 85, 0.1);
 }
 
+.radio-pill:has(input:checked),
+.radio-pill.checked {
+  background: var(--navy-primary);
+  border-color: var(--navy-dark);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0, 40, 85, 0.25);
+  transform: translateY(0);
+}
+
+.radio-pill:has(input:checked) span,
 .radio-pill input:checked + span,
-.radio-pill:has(input:checked) {
-  background: var(--navy-primary);
-  border-color: var(--navy-primary);
-  color: #FFFFFF;
-}
-
 .radio-pill.checked span {
-  background: var(--navy-primary);
-  border-color: var(--navy-primary);
   color: #FFFFFF;
 }
 
-.radio-pill span:hover { border-color: var(--navy-primary); color: var(--navy-primary); }
+.radio-pill:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
 .form-select, .form-input {
   background: #FFFFFF;
-  border: 1px solid var(--silver-border);
-  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--silver-border);
+  border-radius: var(--radius-md);
   color: var(--text-primary);
   font-family: inherit;
   font-size: 13px;
-  padding: 7px 10px;
+  font-weight: 600;
+  padding: 8px 12px;
+  height: 42px;
   transition: border-color var(--transition), box-shadow var(--transition);
   outline: none;
   width: 100%;
+  box-shadow: 0 1px 2px rgba(0, 40, 85, 0.04);
 }
 
 .form-select:focus, .form-input:focus {
@@ -141,17 +186,33 @@
 .form-select option { background: #FFFFFF; }
 
 .checkbox-pill {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  padding: 8px 12px;
+  min-height: 38px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--silver-border);
+  background: #FFFFFF;
+  color: var(--text-primary);
+  font-size: 12.5px;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 13px;
-  color: var(--text-secondary);
-  font-weight: 500;
-  transition: color var(--transition);
+  user-select: none;
+  box-shadow: 0 1px 2px rgba(0, 40, 85, 0.04);
+  transition: all 0.15s ease-in-out;
 }
 
-.checkbox-pill:hover { color: var(--navy-primary); }
+.checkbox-pill:hover {
+  border-color: var(--navy-primary);
+  background: var(--silver-light);
+}
+
+.checkbox-pill:has(input:checked) {
+  border-color: var(--navy-primary);
+  background: rgba(0, 40, 85, 0.05);
+  color: var(--navy-primary);
+}
 
 .checkbox-pill input[type="checkbox"] {
   width: 16px; height: 16px;
