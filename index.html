@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,6 +27,7 @@
   <!-- JSZip for bulk download -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
+
 <body>
 
   <!-- ======================== HEADER ======================== -->
@@ -35,12 +37,20 @@
     </div>
     <div class="header-actions">
       <label id="upload-btn" for="file-input" class="btn btn-primary" title="Cargar archivos PDF">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" y1="3" x2="12" y2="15" />
+        </svg>
         Subir PDFs
       </label>
       <input type="file" id="file-input" accept=".pdf" multiple style="display:none" />
       <button id="download-all-btn" class="btn btn-secondary" title="Descargar todos como ZIP" style="display:none">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
         Descargar Todo (ZIP)
       </button>
     </div>
@@ -59,7 +69,10 @@
       <!-- Drag-and-drop zone (shown when empty) -->
       <div id="drop-zone">
         <div class="drop-zone-inner">
-          <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" class="drop-icon"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" class="drop-icon">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+            <polyline points="14 2 14 8 20 8" />
+          </svg>
           <p class="drop-label">Arrastra tus PDFs aquí</p>
           <p class="drop-sublabel">o usa el botón "Subir PDFs"</p>
         </div>
@@ -74,7 +87,10 @@
       <!-- Empty state shown before any file is selected -->
       <div id="empty-state">
         <div class="empty-state-inner">
-          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" opacity="0.3"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" opacity="0.3">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+            <polyline points="14 2 14 8 20 8" />
+          </svg>
           <p>Selecciona un archivo de la lista para comenzar</p>
         </div>
       </div>
@@ -85,15 +101,23 @@
         <!-- MODULE TABS -->
         <nav id="module-tabs">
           <button class="tab-btn active" data-module="rename" id="tab-rename">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+            </svg>
             Renombrar
           </button>
           <button class="tab-btn" data-module="viewer" id="tab-viewer">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
             Visualizar
           </button>
           <button class="tab-btn" data-module="editor" id="tab-editor">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 4 10 4 10 20 6 20"/><polyline points="14 4 18 4 18 20 14 20"/></svg>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <polyline points="6 4 10 4 10 20 6 20" />
+              <polyline points="14 4 18 4 18 20 14 20" />
+            </svg>
             Editar
           </button>
         </nav>
@@ -104,7 +128,11 @@
           <div class="banner-actions">
             <span id="mark-badge" class="mark-badge" style="display:none">Marcado</span>
             <button id="download-single-btn" class="btn btn-ghost btn-sm" title="Descargar archivo actual">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
               Descargar
             </button>
           </div>
@@ -123,13 +151,17 @@
             </div>
             <div id="page-nav">
               <button id="prev-page-btn" class="btn btn-ghost btn-sm" disabled>
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
                 Anterior
               </button>
               <span id="page-counter">Página 1 de 1</span>
               <button id="next-page-btn" class="btn btn-ghost btn-sm" disabled>
                 Siguiente
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
               </button>
             </div>
           </div>
@@ -192,13 +224,19 @@
                   <span>¿Tiene Variación?</span>
                 </label>
                 <select id="variation-select" class="form-select variation-select" disabled>
-                  <option>V2</option><option>V3</option><option>V4</option><option>V5</option><option>V6</option>
+                  <option>V2</option>
+                  <option>V3</option>
+                  <option>V4</option>
+                  <option>V5</option>
+                  <option>V6</option>
                 </select>
               </div>
 
               <div class="btn-stack">
                 <button id="rename-apply-btn" class="btn btn-primary">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                  </svg>
                   Renombrar y Siguiente
                 </button>
                 <button id="rename-skip-btn" class="btn btn-secondary">Saltar Archivo</button>
@@ -229,7 +267,11 @@
                 <button id="prev-file-btn" class="btn btn-secondary">Archivo Anterior</button>
                 <button id="next-file-btn" class="btn btn-secondary">Archivo Siguiente</button>
                 <button id="save-marks-btn" class="btn btn-primary">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                    <polyline points="17 21 17 13 7 13 7 21" />
+                    <polyline points="7 3 7 8 15 8" />
+                  </svg>
                   Guardar Lista de Marcas (.txt)
                 </button>
               </div>
@@ -275,7 +317,13 @@
       <h2 id="dup-modal-title" class="modal-title">Duplicados Detectados</h2>
       <p class="modal-desc">Se encontraron los siguientes archivos con contenido idéntico:</p>
       <table id="dup-table" class="dup-table">
-        <thead><tr><th>Duplicado</th><th>Original</th><th>Acción</th></tr></thead>
+        <thead>
+          <tr>
+            <th>Duplicado</th>
+            <th>Original</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
         <tbody id="dup-table-body"></tbody>
       </table>
       <div class="modal-footer">
@@ -284,9 +332,21 @@
     </div>
   </div>
 
+  <!-- ======================== SCREEN SIZE WARNING MODAL ======================== -->
+  <div id="screen-warning-modal" class="modal-overlay" style="display:none; z-index:9999" role="alertdialog" aria-modal="true" aria-labelledby="screen-warning-title">
+    <div class="modal-box screen-warning-box">
+      <h2 id="screen-warning-title" class="modal-title">Pantalla No Compatible</h2>
+      <span class="warning-subtitle">Resolución menor a 1000px detectada</span>
+      <p class="modal-desc">
+        Esta herramienta está optimizada para pantallas de escritorio. En pantallas pequeñas o dispositivos móviles, la experiencia puede no ser la ideal.
+      </p>
+    </div>
+  </div>
+
   <!-- ======================== TOAST NOTIFICATIONS ======================== -->
   <div id="toast-container" aria-live="polite"></div>
 
   <script type="module" src="src/js/app.js"></script>
 </body>
+
 </html>

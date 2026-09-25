@@ -50,9 +50,10 @@ export const dom = {
   editorProgress:    () => document.getElementById('editor-progress'),
 
   // Modal
-  dupModal:          () => document.getElementById('dup-modal'),
-  dupTableBody:      () => document.getElementById('dup-table-body'),
-  dupDismissBtn:     () => document.getElementById('dup-dismiss-btn'),
+  dupModal:                () => document.getElementById('dup-modal'),
+  dupTableBody:            () => document.getElementById('dup-table-body'),
+  dupDismissBtn:           () => document.getElementById('dup-dismiss-btn'),
+  screenWarningModal:      () => document.getElementById('screen-warning-modal'),
 
   // Toast
   toastContainer:    () => document.getElementById('toast-container'),

@@ -138,7 +138,17 @@ function wireEvents() {
     if (e.target === dom.dupModal()) dom.dupModal().style.display = 'none';
   });
 
+  window.addEventListener('resize', checkScreenSize);
+
   setupKeyboardShortcuts();
+}
+
+function checkScreenSize() {
+  const modal = dom.screenWarningModal();
+  if (!modal) return;
+
+  // Permanently block usage on screens narrower than 1000px — no dismiss allowed
+  modal.style.display = window.innerWidth < 1000 ? 'flex' : 'none';
 }
 
 function init() {
@@ -150,6 +160,7 @@ function init() {
   addSplitRow();
 
   wireEvents();
+  checkScreenSize();
   dom.dropZone().classList.add('visible');
 }
 
