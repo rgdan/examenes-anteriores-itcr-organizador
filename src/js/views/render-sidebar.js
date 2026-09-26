@@ -6,8 +6,6 @@ import { updateRenamePreview } from '../views/render-rename.js';
 
 export function updateFileCount() {
   dom.fileCount().textContent = state.files.length;
-  const show = state.files.length === 0;
-  dom.dropZone().classList.toggle('visible', show);
 }
 
 export function renderFileList() {

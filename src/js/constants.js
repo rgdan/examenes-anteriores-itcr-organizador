@@ -1,7 +1,6 @@
 export const dom = {
   fileInput:         () => document.getElementById('file-input'),
   downloadAllBtn:    () => document.getElementById('download-all-btn'),
-  dropZone:          () => document.getElementById('drop-zone'),
   fileList:          () => document.getElementById('file-list'),
   fileCount:         () => document.getElementById('file-count'),
   emptyState:        () => document.getElementById('empty-state'),
@@ -49,12 +48,28 @@ export const dom = {
   executeSplitBtn:   () => document.getElementById('execute-split-btn'),
   editorProgress:    () => document.getElementById('editor-progress'),
 
-  // Modal
+  // Modals
   dupModal:                () => document.getElementById('dup-modal'),
   dupTableBody:            () => document.getElementById('dup-table-body'),
   dupDismissBtn:           () => document.getElementById('dup-dismiss-btn'),
   screenWarningModal:      () => document.getElementById('screen-warning-modal'),
 
+  // Onboarding Modal
+  onboardingModal:         () => document.getElementById('onboarding-modal'),
+  onboardingStepUpload:    () => document.getElementById('onboarding-step-upload'),
+  onboardingStepMode:      () => document.getElementById('onboarding-step-mode'),
+  onboardingDropZone:      () => document.getElementById('onboarding-drop-zone'),
+  onboardingFileCount:     () => document.getElementById('onboarding-file-count'),
+  onboardingFileListPreview:() => document.getElementById('onboarding-file-list-preview'),
+  onboardingContinueBtn:   () => document.getElementById('onboarding-continue-btn'),
+  onboardingBackBtn:       () => document.getElementById('onboarding-back-btn'),
+
+  // Header mode badge
+  modeBadgeWrapper:        () => document.getElementById('mode-badge-wrapper'),
+  modeBadge:               () => document.getElementById('mode-badge'),
+  changeModeBtn:           () => document.getElementById('change-mode-btn'),
+
   // Toast
   toastContainer:    () => document.getElementById('toast-container'),
 };
+

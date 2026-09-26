@@ -7,7 +7,7 @@ import { triggerDownload } from './utils.js';
 import { addFiles } from './services/loader.js';
 import { showToast } from './components/toast.js';
 import { prevPage, nextPage } from './components/pdf-viewer.js';
-import { switchModule } from './router.js';
+import { setAppMode } from './router.js';
 import { updateFileCount } from './views/render-sidebar.js';
 import {
   buildYearDropdown,
@@ -32,6 +32,123 @@ import { state } from './services/state.js';
 // Setup PDF.js worker
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+// ============================================================
+//  Onboarding flow
+// ============================================================
+
+/** Tracks files staged in the upload step (before confirmed) */
+let stagedFiles = null;
+
+function showOnboardingStep(step) {
+  const upload = dom.onboardingStepUpload();
+  const mode   = dom.onboardingStepMode();
+  if (step === 'upload') {
+    upload.style.display = '';
+    mode.style.display   = 'none';
+  } else {
+    upload.style.display = 'none';
+    mode.style.display   = '';
+  }
+}
+
+function openOnboarding(step = 'upload') {
+  showOnboardingStep(step);
+  dom.onboardingModal().style.display = 'flex';
+}
+
+function closeOnboarding() {
+  dom.onboardingModal().style.display = 'none';
+}
+
+/** Called when the user picks a mode card */
+function selectMode(name) {
+  closeOnboarding();
+  state.onboardingComplete = true;
+  setAppMode(name);
+}
+
+/** Update the drop zone UI when files are staged */
+function updateStagedUI(files) {
+  stagedFiles = files;
+  const count = files ? files.length : 0;
+  const continueBtn = dom.onboardingContinueBtn();
+  const preview     = dom.onboardingFileListPreview();
+  const countEl     = dom.onboardingFileCount();
+  const dropZone    = dom.onboardingDropZone();
+
+  if (count > 0) {
+    const valid = Array.from(files).filter(f => f.name.toLowerCase().endsWith('.pdf'));
+    countEl.textContent = `${valid.length} archivo(s) PDF seleccionado(s)`;
+    preview.style.display = '';
+    continueBtn.disabled = valid.length === 0;
+    dropZone.classList.add('has-files');
+  } else {
+    preview.style.display = 'none';
+    continueBtn.disabled = true;
+    dropZone.classList.remove('has-files');
+  }
+}
+
+function wireOnboarding() {
+  const dropZone    = dom.onboardingDropZone();
+  const continueBtn = dom.onboardingContinueBtn();
+  const backBtn     = dom.onboardingBackBtn();
+
+  // Click drop zone → open file picker
+  dropZone.addEventListener('click', () => dom.fileInput().click());
+
+  // Drag & Drop on the onboarding drop zone
+  dropZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZone.classList.add('drag-over');
+  });
+  dropZone.addEventListener('dragleave', e => {
+    if (!dropZone.contains(e.relatedTarget)) {
+      dropZone.classList.remove('drag-over');
+    }
+  });
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    updateStagedUI(e.dataTransfer.files);
+  });
+
+  // File input change (triggered by click on drop zone or file picker)
+  dom.fileInput().addEventListener('change', e => {
+    updateStagedUI(e.target.files);
+  });
+
+  // Continue → load staged files then show mode picker
+  continueBtn.addEventListener('click', async () => {
+    if (!stagedFiles || stagedFiles.length === 0) return;
+    await addFiles(stagedFiles);
+    // Reset file input so re-uploading same files works
+    dom.fileInput().value = '';
+    stagedFiles = null;
+    updateStagedUI(null);
+    showOnboardingStep('mode');
+  });
+
+  // Back → return to upload step
+  backBtn.addEventListener('click', () => {
+    showOnboardingStep('upload');
+  });
+
+  // Mode cards
+  document.querySelectorAll('.mode-card').forEach(card => {
+    card.addEventListener('click', () => selectMode(card.dataset.mode));
+  });
+
+  // "Cambiar Modo" header button → reopen mode picker
+  dom.changeModeBtn().addEventListener('click', () => {
+    openOnboarding('mode');
+  });
+}
+
+// ============================================================
+//  Download helpers
+// ============================================================
 
 function downloadCurrentFile() {
   if (state.currentIndex < 0) return;
@@ -64,6 +181,10 @@ async function downloadAllAsZip() {
   }
 }
 
+// ============================================================
+//  Keyboard shortcuts
+// ============================================================
+
 function setupKeyboardShortcuts() {
   document.addEventListener('keydown', (e) => {
     if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
@@ -77,34 +198,28 @@ function setupKeyboardShortcuts() {
   });
 }
 
+// ============================================================
+//  Screen size guard
+// ============================================================
+
+function checkScreenSize() {
+  const modal = dom.screenWarningModal();
+  if (!modal) return;
+
+  // Permanently block usage on screens narrower than 1000px — no dismiss allowed
+  modal.style.display = window.innerWidth < 1000 ? 'flex' : 'none';
+}
+
+// ============================================================
+//  General event wiring (after onboarding is done)
+// ============================================================
+
 function wireEvents() {
-  dom.fileInput().addEventListener('change', e => addFiles(e.target.files));
-
-  document.body.addEventListener('dragover', e => {
-    e.preventDefault();
-    dom.dropZone().classList.add('drag-over');
-  });
-  document.body.addEventListener('dragleave', e => {
-    if (!e.relatedTarget || !document.body.contains(e.relatedTarget)) {
-      dom.dropZone().classList.remove('drag-over');
-    }
-  });
-  document.body.addEventListener('drop', e => {
-    e.preventDefault();
-    dom.dropZone().classList.remove('drag-over');
-    addFiles(e.dataTransfer.files);
-  });
-
-  dom.dropZone().addEventListener('click', () => dom.fileInput().click());
   dom.downloadAllBtn().addEventListener('click', downloadAllAsZip);
   dom.downloadSingleBtn().addEventListener('click', downloadCurrentFile);
 
   dom.prevPageBtn().addEventListener('click', prevPage);
   dom.nextPageBtn().addEventListener('click', nextPage);
-
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => switchModule(btn.dataset.module));
-  });
 
   document.querySelectorAll('input[name="tipo"], input[name="semestre"], input[name="doc"]').forEach(el => {
     el.addEventListener('change', updateRenamePreview);
@@ -143,13 +258,9 @@ function wireEvents() {
   setupKeyboardShortcuts();
 }
 
-function checkScreenSize() {
-  const modal = dom.screenWarningModal();
-  if (!modal) return;
-
-  // Permanently block usage on screens narrower than 1000px — no dismiss allowed
-  modal.style.display = window.innerWidth < 1000 ? 'flex' : 'none';
-}
+// ============================================================
+//  Init
+// ============================================================
 
 function init() {
   buildYearDropdown();
@@ -160,8 +271,13 @@ function init() {
   addSplitRow();
 
   wireEvents();
+  wireOnboarding();
   checkScreenSize();
-  dom.dropZone().classList.add('visible');
+
+  // Setup complete
+  // Show the onboarding modal immediately on load
+  openOnboarding('upload');
 }
 
 document.addEventListener('DOMContentLoaded', init);
+

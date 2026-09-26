@@ -125,3 +125,233 @@
   color: var(--warning);
   flex-shrink: 0;
 }
+
+/* ============================================================
+   Onboarding Modal
+   ============================================================ */
+.onboarding-box {
+  border-top-color: var(--navy-primary);
+  width: 520px;
+  gap: 20px;
+}
+
+/* --- Header row (icon + title) --- */
+.onboarding-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--silver-border);
+}
+
+.onboarding-icon {
+  color: var(--navy-primary);
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.onboarding-subtitle {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* --- Drop Zone --- */
+.onboarding-drop-zone {
+  border: 2px dashed var(--silver-border);
+  border-radius: var(--radius-md);
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+  background: var(--silver-light);
+  text-align: center;
+}
+
+.onboarding-drop-zone:hover,
+.onboarding-drop-zone.drag-over {
+  border-color: var(--navy-primary);
+  background: rgba(0, 40, 85, 0.04);
+}
+
+.onboarding-drop-zone.has-files {
+  border-color: var(--success);
+  background: rgba(25, 135, 84, 0.04);
+}
+
+.onboarding-drop-icon {
+  color: var(--text-muted);
+  transition: color var(--transition), transform var(--transition);
+}
+
+.onboarding-drop-zone:hover .onboarding-drop-icon,
+.onboarding-drop-zone.drag-over .onboarding-drop-icon {
+  color: var(--navy-primary);
+  transform: translateY(-3px);
+}
+
+.onboarding-drop-zone.has-files .onboarding-drop-icon {
+  color: var(--success);
+}
+
+.onboarding-drop-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.onboarding-drop-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.onboarding-drop-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--silver-surface);
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-top: 4px;
+}
+
+/* --- File count preview --- */
+.onboarding-file-list-preview {
+  background: rgba(25, 135, 84, 0.08);
+  border: 1px solid rgba(25, 135, 84, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+
+.onboarding-file-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--success);
+}
+
+/* --- CTA button --- */
+.onboarding-cta {
+  width: 100%;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  font-size: 14px;
+}
+
+/* --- Mode picker step --- */
+.mode-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 14px;
+  border: 2px solid var(--silver-border);
+  border-radius: var(--radius-md);
+  background: var(--silver-light);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition), box-shadow var(--transition);
+  text-align: center;
+}
+
+.mode-card:hover {
+  border-color: var(--navy-primary);
+  background: rgba(0, 40, 85, 0.04);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.mode-card:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(0, 40, 85, 0.07);
+  color: var(--navy-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.mode-card:hover .mode-card-icon {
+  background: rgba(0, 40, 85, 0.12);
+}
+
+.mode-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy-primary);
+}
+
+.mode-card-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* --- Back button --- */
+.onboarding-back {
+  align-self: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.onboarding-back:hover {
+  color: var(--navy-primary);
+}
+
+/* ============================================================
+   Header Mode Badge & Cambiar Modo Button
+   ============================================================ */
+.mode-badge-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mode-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: rgba(255,255,255,0.12);
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.2px;
+}
+
+#mode-badge-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-ghost-light {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.85);
+  gap: 6px;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.btn-ghost-light:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
+  color: #FFFFFF;
+}
+

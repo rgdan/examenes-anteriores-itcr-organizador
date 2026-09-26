@@ -35,16 +35,19 @@
     <div class="header-brand">
       <h1 class="brand-title">Gestor de Exámenes PDF</h1>
     </div>
-    <div class="header-actions">
-      <label id="upload-btn" for="file-input" class="btn btn-primary" title="Cargar archivos PDF">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="17 8 12 3 7 8" />
-          <line x1="12" y1="3" x2="12" y2="15" />
+    <div class="header-actions" id="header-actions">
+      <!-- shown only after mode is selected -->
+      <div id="mode-badge-wrapper" style="display:none">
+        <span class="mode-badge-label">Modo:</span>
+        <span id="mode-badge" class="mode-badge">—</span>
+      </div>
+      <button id="change-mode-btn" class="btn btn-ghost-light" style="display:none">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <polyline points="1 4 1 10 7 10" />
+          <path d="M3.51 15a9 9 0 1 0 .49-4.95" />
         </svg>
-        Subir PDFs
-      </label>
-      <input type="file" id="file-input" accept=".pdf" multiple style="display:none" />
+        Cambiar Modo
+      </button>
       <button id="download-all-btn" class="btn btn-secondary" title="Descargar todos como ZIP" style="display:none">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -54,6 +57,8 @@
         Descargar Todo (ZIP)
       </button>
     </div>
+    <!-- hidden file input used by onboarding modal -->
+    <input type="file" id="file-input" accept=".pdf" multiple style="display:none" />
   </header>
 
   <!-- ======================== MAIN LAYOUT ======================== -->
@@ -66,17 +71,7 @@
         <span id="file-count" class="badge">0</span>
       </div>
 
-      <!-- Drag-and-drop zone (shown when empty) -->
-      <div id="drop-zone">
-        <div class="drop-zone-inner">
-          <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" class="drop-icon">
-            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-            <polyline points="14 2 14 8 20 8" />
-          </svg>
-          <p class="drop-label">Arrastra tus PDFs aquí</p>
-          <p class="drop-sublabel">o usa el botón "Subir PDFs"</p>
-        </div>
-      </div>
+      <!-- Drop zone removed since it is in onboarding -->
 
       <ul id="file-list"></ul>
     </aside>
@@ -98,29 +93,7 @@
       <!-- Working area (shown when a file is selected) -->
       <div id="work-area" style="display:none">
 
-        <!-- MODULE TABS -->
-        <nav id="module-tabs">
-          <button class="tab-btn active" data-module="rename" id="tab-rename">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
-            </svg>
-            Renombrar
-          </button>
-          <button class="tab-btn" data-module="viewer" id="tab-viewer">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
-            Visualizar
-          </button>
-          <button class="tab-btn" data-module="editor" id="tab-editor">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <polyline points="6 4 10 4 10 20 6 20" />
-              <polyline points="14 4 18 4 18 20 14 20" />
-            </svg>
-            Editar
-          </button>
-        </nav>
+        <!-- No tab nav — mode is locked after selection -->
 
         <!-- FILE NAME BANNER -->
         <div id="file-banner">
@@ -310,6 +283,98 @@
       </div><!-- /work-area -->
     </main>
   </div><!-- /app-layout -->
+
+  <!-- ======================== ONBOARDING MODAL ======================== -->
+  <div id="onboarding-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="onboarding-title">
+    <div class="modal-box onboarding-box">
+
+      <!-- ---- STEP 1: Upload ---- -->
+      <div id="onboarding-step-upload">
+        <div class="onboarding-header">
+          <svg class="onboarding-icon" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+            <polyline points="14 2 14 8 20 8" />
+            <path d="M12 12v6" />
+            <path d="M9 15l3-3 3 3" />
+          </svg>
+          <div>
+            <h2 id="onboarding-title" class="modal-title">Gestor de Exámenes PDF</h2>
+            <p class="onboarding-subtitle">Sube los archivos PDF para comenzar</p>
+          </div>
+        </div>
+
+        <div id="onboarding-drop-zone" class="onboarding-drop-zone">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" class="onboarding-drop-icon">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          <p class="onboarding-drop-label">Arrastra tus PDFs aquí</p>
+          <p class="onboarding-drop-sub">o haz clic para seleccionar archivos</p>
+          <span class="onboarding-drop-hint">Solo archivos .pdf</span>
+        </div>
+
+        <div id="onboarding-file-list-preview" class="onboarding-file-list-preview" style="display:none">
+          <p class="onboarding-file-count" id="onboarding-file-count"></p>
+        </div>
+
+        <button id="onboarding-continue-btn" class="btn btn-primary onboarding-cta" disabled>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+          Continuar
+        </button>
+      </div>
+
+      <!-- ---- STEP 2: Mode Picker ---- -->
+      <div id="onboarding-step-mode" style="display:none">
+        <h2 class="modal-title" style="margin-bottom:6px">¿Qué deseas hacer?</h2>
+        <p class="modal-desc" style="margin-bottom:20px">Elige una función. Podrás cambiarla después.</p>
+
+        <div class="mode-cards">
+          <button class="mode-card" id="mode-card-rename" data-mode="rename">
+            <div class="mode-card-icon">
+              <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+              </svg>
+            </div>
+            <span class="mode-card-title">Renombrar</span>
+            <span class="mode-card-desc">Organiza y etiqueta exámenes con nombres estandarizados</span>
+          </button>
+
+          <button class="mode-card" id="mode-card-viewer" data-mode="viewer">
+            <div class="mode-card-icon">
+              <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </div>
+            <span class="mode-card-title">Visualizar</span>
+            <span class="mode-card-desc">Inspecciona y marca los PDFs para revisión</span>
+          </button>
+
+          <button class="mode-card" id="mode-card-editor" data-mode="editor">
+            <div class="mode-card-icon">
+              <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <polyline points="6 4 10 4 10 20 6 20" />
+                <polyline points="14 4 18 4 18 20 14 20" />
+              </svg>
+            </div>
+            <span class="mode-card-title">Editar</span>
+            <span class="mode-card-desc">Divide, fusiona y elimina páginas de los PDFs</span>
+          </button>
+        </div>
+
+        <button id="onboarding-back-btn" class="btn btn-ghost onboarding-back">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+          Volver a cargar archivos
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- ======================== DUPLICATE MODAL ======================== -->
   <div id="dup-modal" class="modal-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="dup-modal-title">

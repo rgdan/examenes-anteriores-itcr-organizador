@@ -8,4 +8,9 @@ export const state = {
   renderTask: null,   // active PDF.js render task
   activeModule: 'rename',
   markedSet: new Set(), // indices of marked files
+
+  // Onboarding state
+  /** @type {'rename'|'viewer'|'editor'|null} */
+  selectedMode: null,
+  onboardingComplete: false,
 };
