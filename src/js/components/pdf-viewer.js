@@ -15,6 +15,7 @@ export async function loadPdfForViewing(bytes) {
     state.pdfJsDoc = await pdfjsLib.getDocument({ data: copy }).promise;
     state.totalPages = state.pdfJsDoc.numPages;
     state.currentPage = 0;
+    state.zoomLevel = 1.0; // Reset zoom on new file
 
     await renderPage();
   } catch (e) {
@@ -45,7 +46,11 @@ export async function renderPage() {
     const viewport0 = page.getViewport({ scale: 1 });
     const scaleW = maxW / viewport0.width;
     const scaleH = maxH / viewport0.height;
-    const scale = Math.min(scaleW, scaleH, 2.5);
+    
+    // Base fit scale 
+    let baseScale = Math.min(scaleW, scaleH, 2.5);
+    // Apply zoom
+    const scale = baseScale * state.zoomLevel;
 
     const viewport = page.getViewport({ scale });
     const devicePixelRatio = window.devicePixelRatio || 1;
@@ -64,6 +69,8 @@ export async function renderPage() {
     dom.pageCounter().textContent = `Página ${state.currentPage + 1} de ${state.totalPages}`;
     dom.prevPageBtn().disabled = state.currentPage === 0;
     dom.nextPageBtn().disabled = state.currentPage >= state.totalPages - 1;
+    dom.zoomInBtn().disabled = state.zoomLevel >= 3.0;
+    dom.zoomOutBtn().disabled = state.zoomLevel <= 0.5;
 
   } catch (e) {
     if (e.name !== 'RenderingCancelledException') {
@@ -84,6 +91,20 @@ export async function prevPage() {
 export async function nextPage() {
   if (state.currentPage < state.totalPages - 1) {
     state.currentPage++;
+    await renderPage();
+  }
+}
+
+export async function zoomIn() {
+  if (state.zoomLevel < 3.0) {
+    state.zoomLevel += 0.25;
+    await renderPage();
+  }
+}
+
+export async function zoomOut() {
+  if (state.zoomLevel > 0.5) {
+    state.zoomLevel -= 0.25;
     await renderPage();
   }
 }

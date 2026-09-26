@@ -13,4 +13,7 @@ export const state = {
   /** @type {'rename'|'viewer'|'editor'|null} */
   selectedMode: null,
   onboardingComplete: false,
+
+  // Zoom state
+  zoomLevel: 1.0,
 };

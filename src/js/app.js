@@ -6,7 +6,7 @@ import { dom } from './constants.js';
 import { triggerDownload } from './utils.js';
 import { addFiles } from './services/loader.js';
 import { showToast } from './components/toast.js';
-import { prevPage, nextPage } from './components/pdf-viewer.js';
+import { prevPage, nextPage, zoomIn, zoomOut } from './components/pdf-viewer.js';
 import { setAppMode } from './router.js';
 import { updateFileCount } from './views/render-sidebar.js';
 import {
@@ -194,6 +194,10 @@ function setupKeyboardShortcuts() {
       case 'ArrowRight': e.preventDefault(); nextPage(); break;
       case 'ArrowUp':    e.preventDefault(); prevFile(); break;
       case 'ArrowDown':  e.preventDefault(); nextFile(); break;
+      case '+':
+      case '=':          e.preventDefault(); zoomIn(); break;
+      case '-':
+      case '_':          e.preventDefault(); zoomOut(); break;
     }
   });
 }
@@ -220,6 +224,8 @@ function wireEvents() {
 
   dom.prevPageBtn().addEventListener('click', prevPage);
   dom.nextPageBtn().addEventListener('click', nextPage);
+  dom.zoomInBtn().addEventListener('click', zoomIn);
+  dom.zoomOutBtn().addEventListener('click', zoomOut);
 
   document.querySelectorAll('input[name="tipo"], input[name="semestre"], input[name="doc"]').forEach(el => {
     el.addEventListener('change', updateRenamePreview);

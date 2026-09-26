@@ -15,6 +15,8 @@ export const dom = {
   prevPageBtn:       () => document.getElementById('prev-page-btn'),
   nextPageBtn:       () => document.getElementById('next-page-btn'),
   pageCounter:       () => document.getElementById('page-counter'),
+  zoomInBtn:         () => document.getElementById('zoom-in-btn'),
+  zoomOutBtn:        () => document.getElementById('zoom-out-btn'),
 
   // Modules
   moduleRename:      () => document.getElementById('module-rename'),
