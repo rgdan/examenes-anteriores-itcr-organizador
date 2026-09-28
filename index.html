@@ -5,8 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestor de Exámenes PDF</title>
-  <meta name="description"
-    content="Herramienta web para renombrar, visualizar, editar y dividir archivos PDF de exámenes universitarios." />
+  <meta name="description" content="Herramienta web para renombrar, visualizar, editar y dividir archivos PDF de exámenes universitarios." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -83,8 +82,7 @@
       <!-- Empty state shown before any file is selected -->
       <div id="empty-state">
         <div class="empty-state-inner">
-          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"
-            opacity="0.3">
+          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" opacity="0.3">
             <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
             <polyline points="14 2 14 8 20 8" />
           </svg>
@@ -170,8 +168,7 @@
               <div class="form-group">
                 <label class="form-label">Tipo de Examen</label>
                 <div class="radio-group radio-grid-5" id="tipo-group">
-                  <label class="radio-pill"><input type="radio" name="tipo" value="P1" checked />
-                    <span>P1</span></label>
+                  <label class="radio-pill"><input type="radio" name="tipo" value="P1" checked /> <span>P1</span></label>
                   <label class="radio-pill"><input type="radio" name="tipo" value="P2" /> <span>P2</span></label>
                   <label class="radio-pill"><input type="radio" name="tipo" value="P3" /> <span>P3</span></label>
                   <label class="radio-pill"><input type="radio" name="tipo" value="RP" /> <span>RP</span></label>
@@ -182,8 +179,7 @@
               <div class="form-group">
                 <label class="form-label">Semestre</label>
                 <div class="radio-group radio-grid-3" id="semestre-group">
-                  <label class="radio-pill"><input type="radio" name="semestre" value="IS" checked />
-                    <span>IS</span></label>
+                  <label class="radio-pill"><input type="radio" name="semestre" value="IS" checked /> <span>IS</span></label>
                   <label class="radio-pill"><input type="radio" name="semestre" value="IIS" /> <span>IIS</span></label>
                   <label class="radio-pill"><input type="radio" name="semestre" value="V" /> <span>Verano</span></label>
                 </div>
@@ -197,10 +193,8 @@
               <div class="form-group">
                 <label class="form-label">Naturaleza del Documento</label>
                 <div class="radio-group radio-grid-2" id="doc-group">
-                  <label class="radio-pill"><input type="radio" name="doc" value="E" checked /> <span>Enunciado
-                      (E)</span></label>
-                  <label class="radio-pill"><input type="radio" name="doc" value="S" /> <span>Solución
-                      (S)</span></label>
+                  <label class="radio-pill"><input type="radio" name="doc" value="E" checked /> <span>Enunciado (E)</span></label>
+                  <label class="radio-pill"><input type="radio" name="doc" value="S" /> <span>Solución (S)</span></label>
                 </div>
               </div>
 
@@ -311,8 +305,7 @@
       <!-- ---- STEP 1: Upload ---- -->
       <div id="onboarding-step-upload">
         <div class="onboarding-header">
-          <svg class="onboarding-icon" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"
-            viewBox="0 0 24 24">
+          <svg class="onboarding-icon" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
             <polyline points="14 2 14 8 20 8" />
             <path d="M12 12v6" />
@@ -325,8 +318,7 @@
         </div>
 
         <div id="onboarding-drop-zone" class="onboarding-drop-zone">
-          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"
-            class="onboarding-drop-icon">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" class="onboarding-drop-icon">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
             <polyline points="17 8 12 3 7 8" />
             <line x1="12" y1="3" x2="12" y2="15" />
@@ -383,7 +375,7 @@
               </svg>
             </div>
             <span class="mode-card-title">Editar</span>
-            <span class="mode-card-desc">Divide, reorganiza y elimina páginas de los PDFs</span>
+            <span class="mode-card-desc">Divide, fusiona y elimina páginas de los PDFs</span>
           </button>
         </div>
 
@@ -399,8 +391,7 @@
   </div>
 
   <!-- ======================== DUPLICATE MODAL ======================== -->
-  <div id="dup-modal" class="modal-overlay" style="display:none" role="dialog" aria-modal="true"
-    aria-labelledby="dup-modal-title">
+  <div id="dup-modal" class="modal-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="dup-modal-title">
     <div class="modal-box">
       <h2 id="dup-modal-title" class="modal-title">Duplicados Detectados</h2>
       <p class="modal-desc">Se encontraron los siguientes archivos con contenido idéntico:</p>
@@ -421,14 +412,12 @@
   </div>
 
   <!-- ======================== SCREEN SIZE WARNING MODAL ======================== -->
-  <div id="screen-warning-modal" class="modal-overlay" style="display:none; z-index:9999" role="alertdialog"
-    aria-modal="true" aria-labelledby="screen-warning-title">
+  <div id="screen-warning-modal" class="modal-overlay" style="display:none; z-index:9999" role="alertdialog" aria-modal="true" aria-labelledby="screen-warning-title">
     <div class="modal-box screen-warning-box">
       <h2 id="screen-warning-title" class="modal-title">Pantalla No Compatible</h2>
       <span class="warning-subtitle">Resolución menor a 1000px detectada</span>
       <p class="modal-desc">
-        Esta herramienta está optimizada para pantallas de escritorio. En pantallas pequeñas o dispositivos móviles, la
-        experiencia puede no ser la ideal.
+        Esta herramienta está optimizada para pantallas de escritorio. En pantallas pequeñas o dispositivos móviles, la experiencia puede no ser la ideal.
       </p>
     </div>
   </div>
