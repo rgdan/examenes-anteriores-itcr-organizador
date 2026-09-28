@@ -208,15 +208,6 @@
   color: var(--text-secondary);
 }
 
-.onboarding-drop-hint {
-  font-size: 11px;
-  color: var(--text-muted);
-  background: var(--silver-surface);
-  padding: 2px 8px;
-  border-radius: 20px;
-  margin-top: 4px;
-}
-
 /* --- File count preview --- */
 .onboarding-file-list-preview {
   background: rgba(25, 135, 84, 0.08);
