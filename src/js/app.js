@@ -13,8 +13,7 @@ import {
   buildYearDropdown,
   updateRenamePreview,
   applyRename,
-  skipFile,
-  quarantineFile
+  deleteFile
 } from './views/render-rename.js';
 import {
   toggleMark,
@@ -240,8 +239,7 @@ function wireEvents() {
   dom.variationSelect().addEventListener('change', updateRenamePreview);
 
   dom.renameApplyBtn().addEventListener('click', applyRename);
-  dom.renameSkipBtn().addEventListener('click', skipFile);
-  dom.renameQuarantineBtn().addEventListener('click', quarantineFile);
+  dom.renameDeleteBtn().addEventListener('click', deleteFile);
 
   dom.chkMark().addEventListener('change', e => toggleMark(e.target.checked));
   dom.prevFileBtn().addEventListener('click', prevFile);

@@ -52,11 +52,11 @@ export function applyRename() {
   goToNextFile();
 }
 
-export function quarantineFile() {
+export function deleteFile() {
   if (state.currentIndex < 0 || state.currentIndex >= state.files.length) return;
   const name = state.files[state.currentIndex].name;
   state.files.splice(state.currentIndex, 1);
-  showToast(`"${name}" movido a cuarentena (eliminado de la sesión).`, 'info');
+  showToast(`"${name}" eliminado de la sesión.`, 'info');
 
   if (state.files.length === 0) {
     state.currentIndex = -1;
@@ -74,10 +74,6 @@ export function quarantineFile() {
   updateFileCount();
   renderFileList();
   selectFile(state.currentIndex);
-}
-
-export function skipFile() {
-  goToNextFile();
 }
 
 export function goToNextFile() {

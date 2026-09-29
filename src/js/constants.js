@@ -30,8 +30,7 @@ export const dom = {
   chkVariation:      () => document.getElementById('chk-variation'),
   variationSelect:   () => document.getElementById('variation-select'),
   renameApplyBtn:    () => document.getElementById('rename-apply-btn'),
-  renameSkipBtn:     () => document.getElementById('rename-skip-btn'),
-  renameQuarantineBtn:() => document.getElementById('rename-quarantine-btn'),
+  renameDeleteBtn:   () => document.getElementById('rename-delete-btn'),
   renameProgress:    () => document.getElementById('rename-progress'),
 
   // Viewer
