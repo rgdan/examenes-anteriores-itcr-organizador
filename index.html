@@ -48,14 +48,20 @@
         </svg>
         Cambiar Modo
       </button>
-      <button id="download-all-btn" class="btn btn-secondary" title="Descargar todos como ZIP" style="display:none">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="7 10 12 15 17 10" />
-          <line x1="12" y1="15" x2="12" y2="3" />
-        </svg>
-        Descargar Todo (ZIP)
-      </button>
+      <div id="download-dropdown" class="dropdown" style="display:none">
+        <button id="download-dropdown-btn" class="btn btn-secondary" title="Opciones de descarga">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Descargar ▾
+        </button>
+        <div class="dropdown-content">
+          <button id="download-single-btn">Archivo Actual</button>
+          <button id="download-all-btn">Todos los archivos (ZIP)</button>
+        </div>
+      </div>
     </div>
     <!-- hidden file input used by onboarding modal -->
     <input type="file" id="file-input" accept=".pdf" multiple style="display:none" />
@@ -100,14 +106,7 @@
           <span id="current-filename">—</span>
           <div class="banner-actions">
             <span id="mark-badge" class="mark-badge" style="display:none">Marcado</span>
-            <button id="download-single-btn" class="btn btn-ghost btn-sm" title="Descargar archivo actual">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-              Descargar
-            </button>
+
           </div>
         </div>
 

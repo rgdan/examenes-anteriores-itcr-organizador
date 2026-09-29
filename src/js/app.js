@@ -218,8 +218,27 @@ function checkScreenSize() {
 // ============================================================
 
 function wireEvents() {
-  dom.downloadAllBtn().addEventListener('click', downloadAllAsZip);
-  dom.downloadSingleBtn().addEventListener('click', downloadCurrentFile);
+  // Dropdown toggle logic
+  dom.downloadDropdownBtn().addEventListener('click', (e) => {
+    e.stopPropagation();
+    dom.downloadDropdown().classList.toggle('active');
+  });
+
+  // Close dropdown on outside click
+  document.addEventListener('click', () => {
+    if (dom.downloadDropdown()) {
+      dom.downloadDropdown().classList.remove('active');
+    }
+  });
+
+  dom.downloadAllBtn().addEventListener('click', () => {
+    dom.downloadDropdown().classList.remove('active');
+    downloadAllAsZip();
+  });
+  dom.downloadSingleBtn().addEventListener('click', () => {
+    dom.downloadDropdown().classList.remove('active');
+    downloadCurrentFile();
+  });
 
   dom.prevPageBtn().addEventListener('click', prevPage);
   dom.nextPageBtn().addEventListener('click', nextPage);

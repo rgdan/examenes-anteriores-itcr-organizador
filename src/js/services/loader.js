@@ -50,5 +50,8 @@ export async function addFiles(fileList) {
     showDuplicatesModal(duplicates);
   }
 
-  dom.downloadAllBtn().style.display = state.files.length > 0 ? 'inline-flex' : 'none';
+  const downloadDropdown = dom.downloadDropdown();
+  if (downloadDropdown) {
+    downloadDropdown.style.display = state.files.length > 0 ? 'inline-block' : 'none';
+  }
 }

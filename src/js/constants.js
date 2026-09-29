@@ -1,13 +1,15 @@
 export const dom = {
   fileInput:         () => document.getElementById('file-input'),
+  downloadDropdown:  () => document.getElementById('download-dropdown'),
+  downloadDropdownBtn:() => document.getElementById('download-dropdown-btn'),
   downloadAllBtn:    () => document.getElementById('download-all-btn'),
+  downloadSingleBtn: () => document.getElementById('download-single-btn'),
   fileList:          () => document.getElementById('file-list'),
   fileCount:         () => document.getElementById('file-count'),
   emptyState:        () => document.getElementById('empty-state'),
   workArea:          () => document.getElementById('work-area'),
   currentFilename:   () => document.getElementById('current-filename'),
   markBadge:         () => document.getElementById('mark-badge'),
-  downloadSingleBtn: () => document.getElementById('download-single-btn'),
 
   // PDF Canvas
   pdfCanvas:         () => document.getElementById('pdf-canvas'),
