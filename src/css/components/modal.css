@@ -156,6 +156,84 @@
   margin-top: 3px;
 }
 
+/* --- Tooltip on Title --- */
+.title-tooltip {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  margin-left: 6px;
+  vertical-align: middle;
+  color: var(--text-muted);
+  cursor: help;
+  transition: color var(--transition);
+}
+
+.title-tooltip:hover {
+  color: var(--navy-primary);
+}
+
+.tooltip-box {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  width: 280px;
+  background: var(--navy-dark);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Bridging gap for hover to click link */
+.tooltip-box::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+
+/* Arrow */
+.tooltip-box::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--navy-dark) transparent;
+}
+
+.title-tooltip:hover .tooltip-box,
+.tooltip-box:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(8px);
+  pointer-events: auto;
+}
+
+.tooltip-box a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.tooltip-box a:hover {
+  color: var(--silver-light);
+}
+
 /* --- Drop Zone --- */
 .onboarding-drop-zone {
   border: 2px dashed var(--silver-border);
