@@ -69,15 +69,20 @@ function selectMode(name) {
 
 /** Update the drop zone UI when files are staged */
 function updateStagedUI(files) {
-  stagedFiles = files;
-  const count = files ? files.length : 0;
+  if (files) {
+    stagedFiles = stagedFiles ? stagedFiles.concat(Array.from(files)) : Array.from(files);
+  } else {
+    stagedFiles = null;
+  }
+  
+  const count = stagedFiles ? stagedFiles.length : 0;
   const continueBtn = dom.onboardingContinueBtn();
   const preview     = dom.onboardingFileListPreview();
   const countEl     = dom.onboardingFileCount();
   const dropZone    = dom.onboardingDropZone();
 
   if (count > 0) {
-    const valid = Array.from(files).filter(f => f.name.toLowerCase().endsWith('.pdf'));
+    const valid = stagedFiles.filter(f => f.name.toLowerCase().endsWith('.pdf'));
     countEl.textContent = `${valid.length} archivo(s) PDF seleccionado(s)`;
     preview.style.display = '';
     continueBtn.disabled = valid.length === 0;
