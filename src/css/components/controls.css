@@ -226,7 +226,6 @@
 .rename-preview-box {
   background: var(--silver-light);
   border: 1px solid var(--silver-border);
-  border-left: 4px solid var(--navy-primary);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
   display: flex;
