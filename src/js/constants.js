@@ -46,6 +46,11 @@ export const dom = {
   // Editor
   deletePagesInput:  () => document.getElementById('delete-pages-input'),
   deletePagesBtn:    () => document.getElementById('delete-pages-btn'),
+  reorderPagesInput: () => document.getElementById('reorder-pages-input'),
+  reorderPagesBtn:   () => document.getElementById('reorder-pages-btn'),
+  movePageFrom:      () => document.getElementById('move-page-from'),
+  movePageTo:        () => document.getElementById('move-page-to'),
+  movePageBtn:       () => document.getElementById('move-page-btn'),
   splitRowsContainer:() => document.getElementById('split-rows-container'),
   addSplitRowBtn:    () => document.getElementById('add-split-row-btn'),
   executeSplitBtn:   () => document.getElementById('execute-split-btn'),

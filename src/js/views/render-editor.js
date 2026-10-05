@@ -99,6 +99,124 @@ export async function executeDeletePages() {
   }
 }
 
+export async function executeReorderPages() {
+  if (state.currentIndex < 0) {
+    showToast('Selecciona un archivo primero.', 'error'); return;
+  }
+
+  const raw = dom.reorderPagesInput().value.trim();
+  if (!raw) { showToast('Indica el nuevo orden de las páginas.', 'error'); return; }
+
+  const pageNums = raw.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n));
+  if (!pageNums.length) { showToast('Formato inválido. Usa: 3,1,2', 'error'); return; }
+
+  const file = state.files[state.currentIndex];
+  const sourceBytes = file.modifiedBytes || file.originalBytes;
+  const totalPgs = state.totalPages;
+
+  const invalid = pageNums.filter(n => n < 1 || n > totalPgs);
+  if (invalid.length) {
+    showToast(`Páginas fuera de rango: ${invalid.join(', ')} (total: ${totalPgs})`, 'error');
+    return;
+  }
+
+  const unique = new Set(pageNums);
+  if (unique.size !== pageNums.length) {
+    showToast('Hay páginas duplicadas en la lista.', 'error');
+    return;
+  }
+
+  // Auto-append missing pages
+  for (let i = 1; i <= totalPgs; i++) {
+    if (!unique.has(i)) {
+      pageNums.push(i);
+    }
+  }
+
+  dom.editorProgress().textContent = 'Reordenando…';
+  try {
+    const sourcePdf = await PDFLib.PDFDocument.load(sourceBytes);
+    const newDoc = await PDFLib.PDFDocument.create();
+    
+    const indices = pageNums.map(n => n - 1);
+    const copiedPages = await newDoc.copyPages(sourcePdf, indices);
+    copiedPages.forEach(p => newDoc.addPage(p));
+    
+    const newBytes = await newDoc.save();
+    file.modifiedBytes = newBytes.buffer;
+
+    renderFileList();
+    await loadPdfForViewing(file.modifiedBytes);
+
+    dom.reorderPagesInput().value = '';
+    dom.editorProgress().textContent = '';
+    showToast('Páginas reordenadas con éxito.', 'success');
+  } catch (e) {
+    dom.editorProgress().textContent = '';
+    showToast(`Error al reordenar páginas: ${e.message}`, 'error');
+  }
+}
+
+export async function executeMovePage() {
+  if (state.currentIndex < 0) {
+    showToast('Selecciona un archivo primero.', 'error'); return;
+  }
+
+  const fromRaw = dom.movePageFrom().value.trim();
+  const toRaw = dom.movePageTo().value.trim();
+
+  if (!fromRaw || !toRaw) {
+    showToast('Indica la página de origen y el destino.', 'error'); return;
+  }
+
+  const from = parseInt(fromRaw, 10);
+  const to = parseInt(toRaw, 10);
+
+  const file = state.files[state.currentIndex];
+  const sourceBytes = file.modifiedBytes || file.originalBytes;
+  const totalPgs = state.totalPages;
+
+  if (isNaN(from) || isNaN(to) || from < 1 || from > totalPgs || to < 1 || to > totalPgs) {
+    showToast(`Las páginas deben estar entre 1 y ${totalPgs}.`, 'error');
+    return;
+  }
+  
+  if (from === to) {
+    showToast('La página de origen y destino son la misma.', 'info');
+    return;
+  }
+
+  dom.editorProgress().textContent = 'Moviendo…';
+  try {
+    const sourcePdf = await PDFLib.PDFDocument.load(sourceBytes);
+    const newDoc = await PDFLib.PDFDocument.create();
+    
+    const indices = [];
+    for (let i = 1; i <= totalPgs; i++) {
+      if (i === from) continue;
+      indices.push(i - 1);
+    }
+    indices.splice(to - 1, 0, from - 1);
+
+    const copiedPages = await newDoc.copyPages(sourcePdf, indices);
+    copiedPages.forEach(p => newDoc.addPage(p));
+    
+    const newBytes = await newDoc.save();
+    file.modifiedBytes = newBytes.buffer;
+
+    renderFileList();
+    await loadPdfForViewing(file.modifiedBytes);
+
+    dom.movePageFrom().value = '';
+    dom.movePageTo().value = '';
+    dom.editorProgress().textContent = '';
+    showToast(`Página ${from} movida a la posición ${to}.`, 'success');
+  } catch (e) {
+    dom.editorProgress().textContent = '';
+    showToast(`Error al mover página: ${e.message}`, 'error');
+  }
+}
+
 export async function executeMultiSplit() {
   if (state.currentIndex < 0) {
     showToast('Selecciona un archivo primero.', 'error'); return;

@@ -24,6 +24,8 @@ import {
 import {
   addSplitRow,
   executeDeletePages,
+  executeReorderPages,
+  executeMovePage,
   executeMultiSplit
 } from './views/render-editor.js';
 import { state } from './services/state.js';
@@ -271,6 +273,8 @@ function wireEvents() {
   dom.saveMarksBtn().addEventListener('click', saveMarks);
 
   dom.deletePagesBtn().addEventListener('click', executeDeletePages);
+  dom.reorderPagesBtn().addEventListener('click', executeReorderPages);
+  dom.movePageBtn().addEventListener('click', executeMovePage);
   dom.addSplitRowBtn().addEventListener('click', addSplitRow);
   dom.executeSplitBtn().addEventListener('click', executeMultiSplit);
 

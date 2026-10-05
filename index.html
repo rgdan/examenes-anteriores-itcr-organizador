@@ -297,6 +297,25 @@
                 </div>
               </div>
 
+              <div class="editor-section">
+                <h3 class="section-sub-title">Mover Página</h3>
+                <p class="section-hint">Mueve una sola página a una nueva posición.</p>
+                <div class="input-row">
+                  <input type="number" id="move-page-from" class="form-input" placeholder="Origen (Ej: 5)" min="1" />
+                  <input type="number" id="move-page-to" class="form-input" placeholder="Destino (Ej: 1)" min="1" />
+                  <button id="move-page-btn" class="btn btn-primary btn-sm">Mover</button>
+                </div>
+              </div>
+
+              <div class="editor-section">
+                <h3 class="section-sub-title">Reordenar Páginas</h3>
+                <p class="section-hint">Ingresa el orden. Las páginas omitidas se agregan al final. Ej: <code>3,1,2</code></p>
+                <div class="input-row">
+                  <input type="text" id="reorder-pages-input" class="form-input" placeholder="Ej: 3,1,2" />
+                  <button id="reorder-pages-btn" class="btn btn-primary btn-sm">Reordenar</button>
+                </div>
+              </div>
+
               <div class="editor-section" id="split-section">
                 <h3 class="section-sub-title">Dividir PDF (Multi-Split)</h3>
                 <p class="section-hint">Define rangos para cada subarchivo. Ej: <code>1-3</code></p>
