@@ -2,6 +2,7 @@ import { state } from '../services/state.js';
 import { dom } from '../constants.js';
 import { showToast } from '../components/toast.js';
 import { selectFile, renderFileList, updateFileCount, updateProgress } from './render-sidebar.js';
+import { openOnboarding } from '../app.js';
 
 export function buildYearDropdown() {
   const select = dom.anoSelect();
@@ -64,6 +65,8 @@ export function deleteFile() {
     dom.emptyState().style.display = 'flex';
     updateFileCount();
     renderFileList();
+    state.onboardingComplete = false;
+    openOnboarding('upload');
     return;
   }
 

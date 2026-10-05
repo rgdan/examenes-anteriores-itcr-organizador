@@ -88,8 +88,16 @@
     <!-- SIDEBAR: File List -->
     <aside id="sidebar">
       <div class="sidebar-header">
-        <span class="sidebar-title">Archivos</span>
-        <span id="file-count" class="badge">0</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="sidebar-title">Archivos</span>
+          <span id="file-count" class="badge">0</span>
+        </div>
+        <button id="add-more-files-btn" class="btn btn-ghost btn-sm" title="Añadir archivos" style="padding:4px; height:24px;">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </button>
       </div>
 
       <!-- Drop zone removed since it is in onboarding -->

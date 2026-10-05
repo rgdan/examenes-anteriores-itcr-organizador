@@ -6,6 +6,7 @@ export const dom = {
   downloadSingleBtn: () => document.getElementById('download-single-btn'),
   fileList:          () => document.getElementById('file-list'),
   fileCount:         () => document.getElementById('file-count'),
+  addMoreFilesBtn:   () => document.getElementById('add-more-files-btn'),
   emptyState:        () => document.getElementById('empty-state'),
   workArea:          () => document.getElementById('work-area'),
   currentFilename:   () => document.getElementById('current-filename'),

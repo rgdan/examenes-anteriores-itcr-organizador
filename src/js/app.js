@@ -53,7 +53,7 @@ function showOnboardingStep(step) {
   }
 }
 
-function openOnboarding(step = 'upload') {
+export function openOnboarding(step = 'upload') {
   showOnboardingStep(step);
   dom.onboardingModal().style.display = 'flex';
 }
@@ -121,8 +121,15 @@ function wireOnboarding() {
   });
 
   // File input change (triggered by click on drop zone or file picker)
-  dom.fileInput().addEventListener('change', e => {
-    updateStagedUI(e.target.files);
+  dom.fileInput().addEventListener('change', async e => {
+    if (state.onboardingComplete) {
+      if (e.target.files.length > 0) {
+        await addFiles(e.target.files);
+        dom.fileInput().value = '';
+      }
+    } else {
+      updateStagedUI(e.target.files);
+    }
   });
 
   // Continue → load staged files then show mode picker
@@ -284,6 +291,8 @@ function wireEvents() {
   dom.dupModal().addEventListener('click', e => {
     if (e.target === dom.dupModal()) dom.dupModal().style.display = 'none';
   });
+
+  dom.addMoreFilesBtn().addEventListener('click', () => dom.fileInput().click());
 
   window.addEventListener('resize', checkScreenSize);
 
