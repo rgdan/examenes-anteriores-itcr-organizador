@@ -2,7 +2,7 @@ import { state } from '../services/state.js';
 import { dom } from '../constants.js';
 import { range, triggerDownload } from '../utils.js';
 import { showToast } from '../components/toast.js';
-import { renderFileList } from './render-sidebar.js';
+import { renderFileList, updateFileCount } from './render-sidebar.js';
 import { loadPdfForViewing } from '../components/pdf-viewer.js';
 
 let splitRowCounter = 0;
@@ -265,12 +265,23 @@ export async function executeMultiSplit() {
       const copiedPages = await newDoc.copyPages(sourcePdf, range(start, end));
       copiedPages.forEach(p => newDoc.addPage(p));
       const bytes = await newDoc.save();
-      const blob = new Blob([bytes], { type: 'application/pdf' });
-      triggerDownload(blob, `${baseName}_parte_${docNum}.pdf`);
+      
+      state.files.push({
+        name: `${baseName}_parte_${docNum}.pdf`,
+        originalBytes: bytes.buffer,
+        modifiedBytes: null,
+        marked: false
+      });
     }
 
+    renderFileList();
+    updateFileCount();
+    
+    // Clear inputs after success
+    splitRows.forEach(r => r.inputEl.value = '');
+
     dom.editorProgress().textContent = '';
-    showToast(`${parsed.length} subarchivo(s) generado(s) y descargado(s).`, 'success');
+    showToast(`${parsed.length} subarchivo(s) extraído(s) y añadido(s) a la sesión.`, 'success');
   } catch (e) {
     dom.editorProgress().textContent = '';
     showToast(`Error al dividir: ${e.message}`, 'error');
