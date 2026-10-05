@@ -63,6 +63,11 @@ export const dom = {
   dupDismissBtn:           () => document.getElementById('dup-dismiss-btn'),
   screenWarningModal:      () => document.getElementById('screen-warning-modal'),
 
+  guidelinesBtn:           () => document.getElementById('guidelines-btn'),
+  guidelinesModal:         () => document.getElementById('guidelines-modal'),
+  guidelinesCloseBtn:      () => document.getElementById('guidelines-close-btn'),
+  guidelinesContent:       () => document.getElementById('guidelines-content'),
+
   // Onboarding Modal
   onboardingModal:         () => document.getElementById('onboarding-modal'),
   onboardingStepUpload:    () => document.getElementById('onboarding-step-upload'),

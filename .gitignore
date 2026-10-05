@@ -43,3 +43,6 @@ logs
 *.njsproj
 *.sln
 *.sw?
+
+# Downloaded Wiki Files
+examenes-anteriores-itcr.wiki/

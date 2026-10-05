@@ -294,6 +294,32 @@ function wireEvents() {
 
   dom.addMoreFilesBtn().addEventListener('click', () => dom.fileInput().click());
 
+  let loadedGuidelines = false;
+  dom.guidelinesBtn().addEventListener('click', async () => {
+    dom.guidelinesModal().style.display = 'flex';
+    if (!loadedGuidelines) {
+      try {
+        let res = await fetch('./examenes-anteriores-itcr.wiki/Nomenclatura-y-Convenciones.md');
+        if (res.ok) {
+          dom.guidelinesContent().src = './examenes-anteriores-itcr.wiki/Nomenclatura-y-Convenciones.md';
+        } else {
+          dom.guidelinesContent().src = 'https://raw.githubusercontent.com/wiki/rgdan/examenes-anteriores-itcr/Nomenclatura-y-Convenciones.md';
+        }
+        loadedGuidelines = true;
+      } catch (e) {
+        dom.guidelinesContent().src = 'https://raw.githubusercontent.com/wiki/rgdan/examenes-anteriores-itcr/Nomenclatura-y-Convenciones.md';
+        loadedGuidelines = true;
+      }
+    }
+  });
+
+  dom.guidelinesCloseBtn().addEventListener('click', () => {
+    dom.guidelinesModal().style.display = 'none';
+  });
+  dom.guidelinesModal().addEventListener('click', e => {
+    if (e.target === dom.guidelinesModal()) dom.guidelinesModal().style.display = 'none';
+  });
+
   window.addEventListener('resize', checkScreenSize);
 
   setupKeyboardShortcuts();

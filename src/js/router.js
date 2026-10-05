@@ -21,11 +21,14 @@ export function setAppMode(name) {
   const badge = dom.modeBadge();
   if (badge) badge.textContent = MODE_LABELS[name] || name;
 
-  // Show mode badge & change-mode button
+  // Show mode badge & change-mode button & guidelines button
   const wrapper = dom.modeBadgeWrapper();
   const changeBtn = dom.changeModeBtn();
+  const guideBtn = dom.guidelinesBtn();
+  
   if (wrapper) wrapper.style.display = 'flex';
   if (changeBtn) changeBtn.style.display = 'inline-flex';
+  if (guideBtn) guideBtn.style.display = 'inline-flex';
 }
 
 /** Legacy alias kept in case anything still calls switchModule */
