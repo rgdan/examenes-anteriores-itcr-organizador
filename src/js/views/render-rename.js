@@ -6,7 +6,7 @@ import { selectFile, renderFileList, updateFileCount, updateProgress } from './r
 export function buildYearDropdown() {
   const select = dom.anoSelect();
   const currentYear = new Date().getFullYear();
-  for (let y = currentYear + 1; y >= 2015; y--) {
+  for (let y = currentYear + 1; y >= 1970; y--) {
     const opt = document.createElement('option');
     opt.value = y;
     opt.textContent = y;
