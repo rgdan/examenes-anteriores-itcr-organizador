@@ -24,7 +24,7 @@ export function addSplitRow() {
   const input = document.createElement('input');
   input.type = 'text';
   input.className = 'form-input';
-  input.placeholder = 'Ej: 1-3';
+  input.placeholder = 'Rango';
 
   const removeBtn = document.createElement('button');
   removeBtn.className = 'split-row-remove';
