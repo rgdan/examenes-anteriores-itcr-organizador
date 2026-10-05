@@ -109,9 +109,9 @@
   max-width: 340px;
 }
 
-.toast-success { border-left: 4px solid var(--success); }
-.toast-error   { border-left: 4px solid var(--accent);  }
-.toast-info    { border-left: 4px solid var(--navy-primary);  }
+.toast-success { background: var(--success); color: #FFFFFF; border: none; }
+.toast-error   { background: var(--accent); color: #FFFFFF; border: none;  }
+.toast-info    { background: var(--navy-primary); color: #FFFFFF; border: none;  }
 
 @keyframes toastIn {
   from { opacity: 0; transform: translateX(20px); }
