@@ -13,7 +13,8 @@ import {
   buildYearDropdown,
   updateRenamePreview,
   applyRename,
-  deleteFile
+  deleteFile,
+  applyAutoDetect
 } from './views/render-rename.js';
 import {
   toggleMark,
@@ -293,6 +294,8 @@ function wireEvents() {
   });
 
   dom.addMoreFilesBtn().addEventListener('click', () => dom.fileInput().click());
+
+  dom.chkAutodetect().addEventListener('change', () => applyAutoDetect());
 
   let loadedGuidelines = false;
   dom.guidelinesBtn().addEventListener('click', async () => {

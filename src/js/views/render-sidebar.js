@@ -4,6 +4,12 @@ import { escapeHtml } from '../utils.js';
 import { loadPdfForViewing } from '../components/pdf-viewer.js';
 import { updateRenamePreview } from '../views/render-rename.js';
 
+// Lazy import to avoid circular deps - resolved at call time
+async function runAutoDetect() {
+  const { applyAutoDetect } = await import('../views/render-rename.js');
+  applyAutoDetect();
+}
+
 export function updateFileCount() {
   dom.fileCount().textContent = state.files.length;
 }
@@ -50,6 +56,7 @@ export async function selectFile(index) {
   updateProgress();
   await loadPdfForViewing(file.modifiedBytes || file.originalBytes);
   updateRenamePreview();
+  runAutoDetect();
 }
 
 export function updateProgress() {

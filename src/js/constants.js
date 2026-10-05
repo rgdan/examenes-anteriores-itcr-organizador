@@ -35,6 +35,7 @@ export const dom = {
   renameApplyBtn:    () => document.getElementById('rename-apply-btn'),
   renameDeleteBtn:   () => document.getElementById('rename-delete-btn'),
   renameProgress:    () => document.getElementById('rename-progress'),
+  chkAutodetect:     () => document.getElementById('chk-autodetect'),
 
   // Viewer
   chkMark:           () => document.getElementById('chk-mark'),

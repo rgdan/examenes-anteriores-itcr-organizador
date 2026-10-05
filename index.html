@@ -191,7 +191,16 @@
 
             <!-- ===== MODULE: RENAME ===== -->
             <div id="module-rename" class="module-pane active">
-              <h2 class="panel-title">Renombrar Archivo</h2>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 4px;">
+                <h2 class="panel-title" style="margin:0;">Renombrar Archivo</h2>
+                <label class="toggle-label" title="Detectar automáticamente año y semestre del PDF">
+                  <input type="checkbox" id="chk-autodetect" />
+                  <span class="toggle-track">
+                    <span class="toggle-thumb"></span>
+                  </span>
+                  <span class="toggle-text">Auto-detectar</span>
+                </label>
+              </div>
 
               <div id="rename-preview" class="rename-preview-box">
                 <span class="rename-preview-label">Nombre resultante:</span>

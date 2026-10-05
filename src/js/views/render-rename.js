@@ -3,6 +3,64 @@ import { dom } from '../constants.js';
 import { showToast } from '../components/toast.js';
 import { selectFile, renderFileList, updateFileCount, updateProgress } from './render-sidebar.js';
 import { openOnboarding } from '../app.js';
+import { extractFirstPageText, parsePdfMetadata } from '../services/pdf-text-extract.js';
+
+/**
+ * When auto-detect is ON, reads the first page text of the current file
+ * and pre-fills the form fields for year, semester, and extraordinario.
+ */
+export async function applyAutoDetect() {
+  if (!dom.chkAutodetect().checked) return;
+  if (state.currentIndex < 0 || state.currentIndex >= state.files.length) return;
+
+  const file = state.files[state.currentIndex];
+  const bytes = file.modifiedBytes || file.originalBytes;
+  if (!bytes) return;
+
+  try {
+    const text = await extractFirstPageText(bytes);
+
+    if (!text || text.trim().length < 5) {
+      showToast('Auto-detectar: el PDF no contiene texto seleccionable (puede ser una imagen escaneada).', 'info');
+      return;
+    }
+
+    const meta = parsePdfMetadata(text);
+    const detected = [];
+
+    if (meta.year) {
+      dom.anoSelect().value = meta.year;
+      detected.push(`Año ${meta.year}`);
+    }
+
+    if (meta.semester) {
+      const radio = document.querySelector(`input[name="semestre"][value="${meta.semester}"]`);
+      if (radio) radio.checked = true;
+      detected.push(`Semestre ${meta.semester}`);
+    }
+
+    if (meta.examType) {
+      const radio = document.querySelector(`input[name="tipo"][value="${meta.examType}"]`);
+      if (radio) radio.checked = true;
+      detected.push(meta.examType);
+    }
+
+    if (meta.extraordinario) {
+      dom.chkExtra().checked = true;
+      detected.push('Extraordinario');
+    }
+
+    updateRenamePreview();
+
+    if (detected.length > 0) {
+      showToast(`Auto-detectado: ${detected.join(' · ')}`, 'success');
+    } else {
+      showToast('Auto-detectar: no se encontró año ni semestre en el texto.', 'info');
+    }
+  } catch (e) {
+    showToast(`Auto-detectar: error al leer el PDF — ${e.message}`, 'error');
+  }
+}
 
 export function buildYearDropdown() {
   const select = dom.anoSelect();

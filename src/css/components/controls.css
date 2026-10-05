@@ -423,3 +423,59 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* ============================================================
+   Auto-detect Toggle Switch
+   ============================================================ */
+.toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-label input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-track {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  background: var(--silver-border);
+  border-radius: 18px;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform var(--transition);
+}
+
+.toggle-label input:checked ~ .toggle-track {
+  background: var(--navy-primary);
+}
+
+.toggle-label input:checked ~ .toggle-track .toggle-thumb {
+  transform: translateX(14px);
+}
+
+.toggle-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color var(--transition);
+}
+
+.toggle-label:has(input:checked) .toggle-text {
+  color: var(--navy-primary);
+}
