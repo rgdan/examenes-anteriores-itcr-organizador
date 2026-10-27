@@ -64,18 +64,21 @@ export function parsePdfMetadata(text) {
   //          "Tercer Examen Parcial", "III Examen Parcial"
   //          Also loose: "Primer Parcial", "Segundo Parcial", etc.
   const isP1 = (
+    /\bexamen\s+parcial\s+1\b/i.test(text) ||
     /\bprimer[ao]?\s+(examen\s+)?parcial\b/i.test(text) ||
     /\bi\s+(examen\s+)?parcial\b/i.test(text) ||
     /\b1[eoa]r?\s+(examen\s+)?parcial\b/i.test(text)
   );
 
   const isP2 = (
+    /\bexamen\s+parcial\s+2\b/i.test(text) ||
     /\bsegund[ao]\s+(examen\s+)?parcial\b/i.test(text) ||
     /\bii\s+(examen\s+)?parcial\b/i.test(text) ||
     /\b2[dao]?\s*(examen\s+)?parcial\b/i.test(text)
   );
 
   const isP3 = (
+    /\bexamen\s+parcial\s+3\b/i.test(text) ||
     /\btercer[ao]?\s+(examen\s+)?parcial\b/i.test(text) ||
     /\biii\s+(examen\s+)?parcial\b/i.test(text) ||
     /\b3[eoa]r?\s*(examen\s+)?parcial\b/i.test(text)
