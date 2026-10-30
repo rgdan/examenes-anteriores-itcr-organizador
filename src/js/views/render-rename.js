@@ -114,6 +114,7 @@ export function applyRename() {
 export function deleteFile() {
   if (state.currentIndex < 0 || state.currentIndex >= state.files.length) return;
   const name = state.files[state.currentIndex].name;
+  if (!window.confirm(`¿Eliminar "${name}" de la sesión? Los cambios sin descargar se perderán. El archivo original en tu equipo no se elimina.`)) return;
   state.files.splice(state.currentIndex, 1);
   showToast(`"${name}" eliminado de la sesión.`, 'info');
 
