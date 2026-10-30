@@ -86,7 +86,9 @@
 #toast-container {
   position: fixed;
   bottom: 24px;
-  right: 24px;
+  left: 24px;
+  max-width: calc(100vw - 48px);
+  pointer-events: none;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -114,13 +116,13 @@
 .toast-info    { background: var(--navy-primary); color: #FFFFFF; border: none;  }
 
 @keyframes toastIn {
-  from { opacity: 0; transform: translateX(20px); }
+  from { opacity: 0; transform: translateX(-20px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes toastOut {
   from { opacity: 1; transform: translateX(0); max-height: 60px; }
-  to   { opacity: 0; transform: translateX(20px); max-height: 0; padding: 0; margin: 0; }
+  to   { opacity: 0; transform: translateX(-20px); max-height: 0; padding: 0; margin: 0; }
 }
 
 .toast.hiding { animation: toastOut 0.22s ease forwards; }

@@ -6,7 +6,7 @@ import { dom } from './constants.js';
 import { triggerDownload } from './utils.js';
 import { addFiles } from './services/loader.js';
 import { showToast } from './components/toast.js';
-import { prevPage, nextPage, zoomIn, zoomOut } from './components/pdf-viewer.js';
+import { prevPage, nextPage, firstPage, lastPage, zoomIn, zoomOut } from './components/pdf-viewer.js';
 import { setAppMode } from './router.js';
 import { updateFileCount } from './views/render-sidebar.js';
 import {
@@ -257,6 +257,8 @@ function wireEvents() {
 
   dom.prevPageBtn().addEventListener('click', prevPage);
   dom.nextPageBtn().addEventListener('click', nextPage);
+  dom.firstPageBtn().addEventListener('click', firstPage);
+  dom.lastPageBtn().addEventListener('click', lastPage);
   dom.zoomInBtn().addEventListener('click', zoomIn);
   dom.zoomOutBtn().addEventListener('click', zoomOut);
 

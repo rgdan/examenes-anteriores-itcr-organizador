@@ -69,6 +69,8 @@ export async function renderPage() {
     dom.pageCounter().textContent = `Página ${state.currentPage + 1} de ${state.totalPages}`;
     dom.prevPageBtn().disabled = state.currentPage === 0;
     dom.nextPageBtn().disabled = state.currentPage >= state.totalPages - 1;
+    dom.firstPageBtn().disabled = state.currentPage === 0;
+    dom.lastPageBtn().disabled = state.currentPage >= state.totalPages - 1;
     dom.zoomInBtn().disabled = state.zoomLevel >= 3.0;
     dom.zoomOutBtn().disabled = state.zoomLevel <= 0.5;
 
@@ -91,6 +93,20 @@ export async function prevPage() {
 export async function nextPage() {
   if (state.currentPage < state.totalPages - 1) {
     state.currentPage++;
+    await renderPage();
+  }
+}
+
+export async function firstPage() {
+  if (state.pdfJsDoc && state.currentPage > 0) {
+    state.currentPage = 0;
+    await renderPage();
+  }
+}
+
+export async function lastPage() {
+  if (state.pdfJsDoc && state.currentPage < state.totalPages - 1) {
+    state.currentPage = state.totalPages - 1;
     await renderPage();
   }
 }
