@@ -1,6 +1,6 @@
 import { escapeHtml } from '../utils.js';
 
-export function showPdfComparison(current, existing, newName) {
+export function showPdfComparison(current, existing, newName, onOpen, onDelete) {
   const dialog = document.createElement('dialog');
   dialog.className = 'modal-box pdf-comparison';
   dialog.setAttribute('aria-labelledby', 'comparison-title');
@@ -40,7 +40,28 @@ export function showPdfComparison(current, existing, newName) {
       <div class="comparison-canvas-wrapper"><canvas aria-label="Vista previa del ${index === 0 ? 'archivo a renombrar' : 'archivo existente'}"></canvas></div>`;
     dialog.querySelector('.comparison-files').appendChild(pane);
 
-    const [prev, next] = pane.querySelectorAll('button');
+    const actions = document.createElement('div');
+    actions.className = 'comparison-file-actions';
+    if (index === 1) {
+      const open = document.createElement('button');
+      open.className = 'btn btn-ghost btn-sm';
+      open.textContent = 'Ir al archivo existente';
+      open.addEventListener('click', () => {
+        dialog.close();
+        onOpen(file);
+      });
+      actions.appendChild(open);
+    }
+    const remove = document.createElement('button');
+    remove.className = 'btn btn-danger btn-sm';
+    remove.textContent = index === 0 ? 'Eliminar archivo a renombrar' : 'Eliminar archivo existente';
+    remove.addEventListener('click', () => {
+      if (onDelete(file)) dialog.close();
+    });
+    actions.appendChild(remove);
+    pane.appendChild(actions);
+
+    const [prev, next] = pane.querySelectorAll('.comparison-page-nav button');
     const status = pane.querySelector('[role="status"]');
     const canvas = pane.querySelector('canvas');
     let pageNumber = 1;

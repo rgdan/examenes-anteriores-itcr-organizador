@@ -276,7 +276,7 @@ function wireEvents() {
   dom.variationSelect().addEventListener('change', updateRenamePreview);
 
   dom.renameApplyBtn().addEventListener('click', applyRename);
-  dom.renameDeleteBtn().addEventListener('click', deleteFile);
+  dom.renameDeleteBtn().addEventListener('click', () => deleteFile());
 
   dom.chkMark().addEventListener('change', e => toggleMark(e.target.checked));
   dom.prevFileBtn().addEventListener('click', prevFile);

@@ -98,7 +98,8 @@ export function applyRename() {
 
   const collision = state.files.find((f, i) => i !== state.currentIndex && f.name === newName);
   if (collision) {
-    showPdfComparison(file, collision, newName);
+    showPdfComparison(file, collision, newName,
+      target => selectFile(state.files.indexOf(target)), deleteFile);
     return;
   }
 
@@ -112,11 +113,14 @@ export function applyRename() {
   goToNextFile();
 }
 
-export function deleteFile() {
-  if (state.currentIndex < 0 || state.currentIndex >= state.files.length) return;
-  const name = state.files[state.currentIndex].name;
-  if (!window.confirm(`¿Eliminar "${name}" de la sesión? Los cambios sin descargar se perderán. El archivo original en tu equipo no se elimina.`)) return;
-  state.files.splice(state.currentIndex, 1);
+export function deleteFile(file = state.files[state.currentIndex]) {
+  const index = state.files.indexOf(file);
+  if (index < 0) return false;
+  const name = file.name;
+  if (!window.confirm(`¿Eliminar "${name}" de la sesión? Los cambios sin descargar se perderán. El archivo original en tu equipo no se elimina.`)) return false;
+  const deletingCurrent = index === state.currentIndex;
+  state.files.splice(index, 1);
+  if (index < state.currentIndex) state.currentIndex--;
   showToast(`"${name}" eliminado de la sesión.`, 'info');
 
   if (state.files.length === 0) {
@@ -127,7 +131,7 @@ export function deleteFile() {
     renderFileList();
     state.onboardingComplete = false;
     openOnboarding('upload');
-    return;
+    return true;
   }
 
   if (state.currentIndex >= state.files.length) {
@@ -136,7 +140,9 @@ export function deleteFile() {
 
   updateFileCount();
   renderFileList();
-  selectFile(state.currentIndex);
+  if (deletingCurrent) selectFile(state.currentIndex);
+  else updateProgress();
+  return true;
 }
 
 export function goToNextFile() {
