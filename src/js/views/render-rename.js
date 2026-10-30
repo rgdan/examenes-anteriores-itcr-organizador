@@ -1,6 +1,7 @@
 import { state } from '../services/state.js';
 import { dom } from '../constants.js';
 import { showToast } from '../components/toast.js';
+import { showPdfComparison } from '../components/pdf-comparison.js';
 import { selectFile, renderFileList, updateFileCount, updateProgress } from './render-sidebar.js';
 import { openOnboarding } from '../app.js';
 import { extractFirstPageText, parsePdfMetadata } from '../services/pdf-text-extract.js';
@@ -95,9 +96,9 @@ export function applyRename() {
   const newName = buildRenamePreviewName();
   const file = state.files[state.currentIndex];
 
-  const collision = state.files.some((f, i) => i !== state.currentIndex && f.name === newName);
+  const collision = state.files.find((f, i) => i !== state.currentIndex && f.name === newName);
   if (collision) {
-    showToast(`Ya existe un archivo con el nombre "${newName}"`, 'error');
+    showPdfComparison(file, collision, newName);
     return;
   }
 

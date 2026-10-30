@@ -201,6 +201,7 @@ async function downloadAllAsZip() {
 
 function setupKeyboardShortcuts() {
   document.addEventListener('keydown', (e) => {
+    if (document.querySelector('dialog[open]')) return;
     if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
 
     switch (e.key) {

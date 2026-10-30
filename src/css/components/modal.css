@@ -422,3 +422,47 @@
   color: #FFFFFF;
 }
 
+
+/* Rename conflict comparison */
+.pdf-comparison {
+  margin: auto;
+  width: 1200px;
+  max-height: 94vh;
+  color: var(--text-primary);
+}
+
+.pdf-comparison:not([open]) { display: none; }
+
+.pdf-comparison::backdrop { background: rgba(0, 24, 53, 0.6); }
+
+.comparison-files {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.comparison-file { min-width: 0; }
+.comparison-file h3 { font-size: 14px; }
+.comparison-name { overflow-wrap: anywhere; margin: 6px 0; }
+
+.comparison-page-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 12px 0;
+  font-size: 12px;
+}
+
+.comparison-canvas-wrapper {
+  max-height: 56vh;
+  overflow: auto;
+  border: 1px solid var(--silver-border);
+  background: var(--silver-light);
+}
+
+.comparison-canvas-wrapper canvas { display: block; }
+
+@media (max-width: 700px) {
+  .comparison-files { grid-template-columns: 1fr; }
+}
