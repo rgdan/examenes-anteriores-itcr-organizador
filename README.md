@@ -8,7 +8,7 @@ Esta herramienta web está diseñada para agilizar el procesamiento, renombrado 
 
 Para utilizar el organizador y preparar nuevos exámenes para el proyecto, visite la aplicación web alojada en:
 
-**[Exámenes Anteriores ITCR - Organizador](https://example.com)**
+**[Exámenes Anteriores ITCR - Organizador](https://rgdan.github.io/examenes-anteriores-itcr-organizador/)**
 
 ---
 
